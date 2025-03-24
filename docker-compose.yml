@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  chirpfeed-back:
+    # build:
+    #   context: ./chirpfeed
+    #   dockerfile: Dockerfile-back
+    image: chirpfeed-back-demo
+    # image: chirpfeed-back-snapshot
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./chirpfeed/uploads:/app/uploads
+    networks:
+      - app-network
+
+  chirpfeed-ui:
+    build:
+      context: ./chirpfeed
+      dockerfile: Dockerfile-ui
+    ports:
+      - "8080:8080"
+    depends_on:
+      - chirpfeed-back
+    networks:
+      - app-network
+
+  profile:
+    build:
+      context: ./profile-folio-uploader
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    depends_on:
+      - chirpfeed-ui
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

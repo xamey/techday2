@@ -129,20 +129,22 @@ const app = new Elysia()
         return { success: false, error: "Username is already taken" };
       }
 
-      let profilePictureUrl;
-      if (profilePicture && mimeType) {
-        profilePictureUrl = await saveImage(profilePicture, mimeType);
-      } else {
+      let _base64Image;
+      let _mimeType;
+      if (!profilePicture && !mimeType) {
         // Fetch random image from picsum.photos if no profile picture is provided
         try {
           const response = await fetch("https://picsum.photos/200/300");
           const arrayBuffer = await response.arrayBuffer();
           const buffer = Buffer.from(arrayBuffer);
-          const base64Image = buffer.toString("base64");
-          profilePictureUrl = await saveImage(base64Image, "image/jpeg");
+          _base64Image = buffer.toString("base64");
+          _mimeType = "image/jpeg";
         } catch (error) {
           console.error("Error fetching random profile picture:", error);
         }
+      } else {
+        _base64Image = profilePicture;
+        _mimeType = mimeType;
       }
 
       // Create the user
@@ -151,7 +153,8 @@ const app = new Elysia()
           name,
           username,
           bio,
-          profilePicture: profilePictureUrl,
+          profilePicture: _base64Image,
+          mimeType: _mimeType,
           superUser: superUser || false,
         },
       });

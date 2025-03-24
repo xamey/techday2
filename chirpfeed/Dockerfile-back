@@ -12,5 +12,7 @@ COPY . .
 # Expose the port your app runs on (adjust if needed)
 EXPOSE 3000
 
+RUN bun prisma generate
+
 # Run the development server
 CMD ["bun", "run", "dev:server"] 

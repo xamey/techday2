@@ -1,10 +1,11 @@
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-1.1.x"]
 }
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://chirpfeed_owner:npg_KjEp2mWqZi7A@ep-little-bonus-a2nnsb20-pooler.eu-central-1.aws.neon.tech/chirpfeed?sslmode=require"
+  url      = "postgresql://chirpfeed-techday_owner:npg_MISh0QPY8Xuy@ep-red-sea-abkc996b-pooler.eu-west-2.aws.neon.tech/chirpfeed-techday?sslmode=require"
 }
 
 model User {
@@ -13,6 +14,7 @@ model User {
   name           String
   bio            String?
   profilePicture String?
+  mimeType       String?
   superUser      Boolean   @default(false)
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
