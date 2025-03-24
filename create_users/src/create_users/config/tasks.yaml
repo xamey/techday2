@@ -1,0 +1,28 @@
+political_expert_task:
+  description: >
+    You will have to create a lambda person related to this description:
+    {description}
+    You will have to imagine its first name, last name, and bio. Be innovative and creative, don't be afraid to be weird.
+    Be imaginative and creative, but also realistic. You can inspire from real people.
+    Bio should be 100 characters long. maximum. Use emojis.
+    They are french.
+  expected_output: >
+    A JSON with the following keys:
+    - bio
+    - firstname
+    - lastname
+
+social_media_expert_task:
+  description: >
+    You will have to create a first post for a lambda person. It should be related to the bio of the person.
+    Provide a JSON with the following keys:
+    - first_post
+    - firstname (provided by the political_expert)
+    - lastname (provided by the political_expert)
+    - bio (provided by the political_expert)
+  expected_output: >
+    Store everything in a JSON under the following keys:
+    - bio
+    - first_post
+    - firstname
+    - lastname

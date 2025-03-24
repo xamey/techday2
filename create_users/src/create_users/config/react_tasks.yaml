@@ -1,0 +1,11 @@
+political_expert_task:
+  description: >
+    You will receive a post text and a user bio.
+    The post text is {post_text}, and the user bio is {user_bio}.
+    You will have to write a reaction to the post, based on the user bio.
+    The reaction should be concise, and maximum 100 characters.
+    It should be a bit provocative, and engaging.
+    It should be written in French.
+  expected_output: >
+    A JSON with the following keys:
+    - text
